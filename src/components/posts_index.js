@@ -12,12 +12,12 @@ class PostIndex extends Component{
     renderPosts(){
         return _.map(this.props.posts, post => {
             return (
-                <li className="list-group-item" key={post.id}>{post.content} </li>
+                <li className="list-group-item" key={post.id}><Link to={`/posts/${post.id}`}>{post.id}</Link></li>
             )
         })
     }
     render(){
-        console.log(this.props.posts);
+        // console.log(this.props.posts);
         return (
             <div>
                 <div className="text-xs-right">
@@ -26,17 +26,18 @@ class PostIndex extends Component{
                 <h3>Posts </h3>
                 <ul className="list-group">
                     {this.renderPosts()}
+                    {/* {_.map(this.props.posts, post => {return (<div>{post.id}</div>);})} */}
                 </ul>
             </div>
         );
     }
 }
 
-function mapStatesToProps(state){
+function mapStateToProps(state){
     return{
-        posts: state.posts
+        posts : state.posts
     };
 }
 
-export default connect(mapStatesToProps, { fetchPosts })(PostIndex);
+export default connect(mapStateToProps, { fetchPosts })(PostIndex);
 //this still brings us the access of this.props.fetchPosts inside PostIndex.
